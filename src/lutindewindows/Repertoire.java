@@ -21,26 +21,37 @@ public class Repertoire {
     public Repertoire(String n) {
         this.nom = n;
     }
-    public void addChildren(Repertoire enfant){
+
+    public void addChildren(Repertoire enfant) {
         enfant.parent = this;
         this.rep.add(enfant);
     }
+
     public void afficherNom() {
         //Probleme dans l'ordre
-        System.out.println(this.nom);
+        String intentation = "";
+        for (int i = 0; i < getIndente(); i++) {
+            intentation += indentation();
+        }
+        System.out.println(intentation+this.nom);
         for (Repertoire repertoire : rep) {
             repertoire.afficherNom();
         }
     }
+
     //pourquoi on l'utilise
-    public int getIndente(){
+    public int getIndente() {
         //il manque quelquechose
-        return this.parent.getIndente()+1;
+        if (this.parent == null) {
+            return 0;
+        } else {
+            return this.parent.getIndente() + 1;
+        }
     }
+
     //tab 
     //le nbr de tab = nbr de parent 
-    public String indentation(){
-        
+    public String indentation() {
         return "\t";
     }
 }
